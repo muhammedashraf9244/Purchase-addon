@@ -1,0 +1,82 @@
+<odoo>
+  <data>
+
+      <!--form view-->
+      <record model="ir.ui.view" id="purchase_orders_view">
+      <field name="name">purchase order view</field>
+      <field name="model">purchase.order.test</field>
+      <field name="arch" type="xml">
+          <form>
+              <header>
+                 <button string="Submit For Approval" name="state_to_be_approved" type="object" states="draft"></button>
+                 <button string="Cancel" name="state_to_be_canceled" type="object" states="draft"></button>
+                 <button string="Reject" name="%(purchase_orders.order_rejection_wizard)d" type="action" states="to be approved"></button>
+                 <button string="Approve" name="send_email" type="object" states="to be approved"></button>
+                 <button string="Email" name="get_email_to" type="object"></button>
+                 <button string="Reset to Draft" name="state_to_be_draft" type="object" states="cancel"></button>
+                 <button string="check group" name="check_group" type="object" ></button>
+                  <field name="state" widget="statusbar" statusbar_visible="draft,to be approved,approve,reject,cancel"/>
+              </header>
+
+              <sheet>
+                  <group>
+                      <group>
+                          <field name="order_name" attrs="{'readonly': ['|', ('state', '=', 'reject'),('state', '=', 'approve')]}"/>
+                          <field name="requested_by" attrs="{'readonly': ['|', ('state', '=', 'reject'),('state', '=', 'approve')]}"/>
+                          <field name="email_id" attrs="{'readonly': ['|', ('state', '=', 'reject'),('state', '=', 'approve')]}"/>
+                          <field name="sub_total" readonly="1"/>
+                      </group>
+                      <group>
+                          <field name="start_date" attrs="{'readonly': ['|', ('state', '=', 'reject'),('state', '=', 'approve')]}"/>
+                          <field name="end_date" attrs="{'readonly': ['|', ('state', '=', 'reject'),('state', '=', 'approve')]}" />
+                          <field name="reject_reason" attrs="{'invisible': [('state', '!=', 'reject')], 'readonly': [('state', '=', 'reject')]}"/>
+                      </group>
+                  </group>
+                  <group>
+                      <field name="order_lines" attrs="{'readonly': ['|', ('state', '=', 'reject'), ('state', '=', 'approve')]}">
+                          <tree string="Orders" editable="bottom">
+                              <field name="product_id"/>
+                              <field name="description"/>
+                              <field name="quantity"/>
+                              <field name="cost_price"/>
+                              <field name="total"/>
+                              <field name="order_id" invisible="1" readonly="1"/>
+                          </tree>
+                      </field>
+                  </group>
+              </sheet>
+          </form>
+      </field>
+
+    </record>
+
+      <!--tree view-->
+      <record model="ir.ui.view" id="purchase_orders_tree">
+      <field name="name">purchase order tree</field>
+      <field name="model">purchase.order.test</field>
+      <field name="arch" type="xml">
+          <tree>
+              <field name="order_name" />
+              <field name="requested_by" />
+              <field name="start_date" />
+              <field name="state" />
+          </tree>
+      </field>
+    </record>
+
+      <!-- MenuItem and Action -->
+      <record model="ir.actions.act_window" id="purchase_orders_action">
+            <field name="name">Orders</field>
+            <field name="res_model">purchase.order.test</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the first Order !</p>
+            </field>
+        </record>
+
+      <menuitem name="New Orders" id="purchase_orders" parent="purchase.menu_purchase_root"
+              action="purchase_orders_action" />
+
+  </data>
+</odoo>

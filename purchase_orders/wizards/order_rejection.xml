@@ -1,0 +1,38 @@
+<odoo>
+
+        <record id="order_reject_wizard_action" model="ir.ui.view">
+            <field name="name">Rejection Reason</field>
+            <field name="model">rejection.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="order_id" invisible="1" readonly="1"/>
+                        <field name="reject_reason"/>
+                    </group>
+                    <footer>
+                        <button name="reject_order" string="Submit" type="object"></button>
+                        <button name="cancel" string="Cancel" special="cancel" type="object"></button>
+                    </footer>
+                </form>
+            </field>
+
+        </record>
+
+<!--        <record id="order_rejection_wizard" model="ir.actions.act_window">-->
+<!--            <field name="name">order rejection wizard</field>-->
+<!--            <field name="res_model">rejection.order</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="view_mode">form</field>-->
+<!--            <field name="view_id" ref="order_reject_wizard_action"/>-->
+<!--            <field name="target">New</field>-->
+<!--        </record>-->
+<!--    -->
+        <record id="order_rejection_wizard" model="ir.actions.act_window">
+        <field name="name">Order Rejection</field>
+        <field name="res_model">rejection.order</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="order_reject_wizard_action"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

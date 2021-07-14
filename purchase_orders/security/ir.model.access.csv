@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_orders_test,access.purchase.orders.test,model_purchase_order_test,,1,1,1,1
+access_purchase_orders_test_line,access.purchase.orders.test_line,model_purchase_order_test_line,,1,1,1,1

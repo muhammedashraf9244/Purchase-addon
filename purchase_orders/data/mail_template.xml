@@ -1,0 +1,17 @@
+<odoo>
+    <data noupdate="1">
+        <record id="order_mail_template" model="mail.template">
+             <field name="name">Purchase Order: Send By email</field>
+                <field name="model_id" ref="purchase_orders.model_purchase_order_test"/>
+                <field name="email_from">Odoo</field>
+<!--                <field name="email_to">mark.brown23@example.com</field>-->
+<!--                <field name="email_to">${object.get_email_to()}</field>-->
+                <field name="subject">Purchase Order: ${object.order_name}</field>
+                <field name="body_html" type="html">
+                    <div>
+                        <p> Purchase Order With name ${object.order_name} has been approved </p>
+                    </div>
+                </field>
+        </record>
+    </data>
+</odoo>

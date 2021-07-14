@@ -1,0 +1,51 @@
+
+<odoo>
+    <template id="report_order_card">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="row" style="margin-left:2%">
+                        <div style="width:50%; padding-left:4%; font-size:18px;">
+                           <strong style="float:left;"> Order Name: </strong> <p t-field="o.order_name"></p>
+                            <strong style="float:left;">Requested By :</strong><p t-field="o.requested_by"></p>
+                        </div>
+                        <div style="font-size:18px;width:50%;">
+                            <strong style="float:left;"> Start Date : </strong><p t-field="o.start_date"></p>
+                            <strong style="float:left;"> End Date : </strong><p t-field="o.end_date"></p>
+                        </div>
+                    </div>
+
+                    <table class="table table-sm o_main_table" style="margin-top:30px">
+                        <tr>
+                            <th><p><strong>Product Name</strong></p></th>
+                            <th><p><strong>Quantity</strong></p></th>
+                            <th><p><strong>Unit Price</strong></p></th>
+                            <th><p><strong>Total</strong></p></th>
+                        </tr>
+                        <t t-foreach="orders_list" t-as="order">
+                            <tr>
+                            <td><t t-esc="order['product_id']"/></td>
+                            <td><t t-esc="order['quantity']"/></td>
+                            <td><t t-esc="order['cost_price']"/></td>
+                            <td><t t-esc="order['total']"/></td>
+                            </tr>
+                        </t>
+
+                        <t>
+                            <tr class="is-subtotal text-right">
+                                <td name="td_section_subtotal" colspan="99">
+                                    <strong class="mr16">Subtotal</strong>
+                                    <span
+                                        t-esc="o.sub_total"
+                                    />
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+
+                </t>
+            </t>
+        </t>
+
+    </template>
+</odoo>

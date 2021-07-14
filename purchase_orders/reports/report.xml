@@ -1,0 +1,10 @@
+<odoo>
+    <report
+        id="order_report"
+        string="Order"
+        model="purchase.order.test"
+        report_type="qweb-pdf"
+        name="purchase_orders.report_order_card"
+        file="purchase_orders.report_order_card"
+    />
+</odoo>

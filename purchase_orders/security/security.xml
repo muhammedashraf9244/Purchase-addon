@@ -1,0 +1,24 @@
+<!--<odoo>-->
+<!--    <record model="ir.module.category" id="module_category_purchase">-->
+<!--        <field name="name">Purchase</field>-->
+<!--    </record>-->
+
+<!--</odoo>-->
+
+<odoo>
+    <record id="purchase_category" model="ir.module.category">
+        <field name="name">Purchase Control</field>
+        <field name="description">Category For Purchase</field>
+    </record>
+
+    <record id="purchase_user_group" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="purchase_category"/>
+    </record>
+
+    <record id="purchase_manager_groups" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="purchase_category"/>
+        <field name="implied_ids" eval="[(4, ref('purchase_user_group'))]"></field>
+    </record>
+</odoo>
